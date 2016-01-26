@@ -2,7 +2,7 @@
 
 This extension for Chrome provides a button to copy the ID of a multibattle to clipboard. Inspired by the [battle.js script created by ckx000](https://github.com/ckx000/GBF).
 
-![](https://raw.githubusercontent.com/menma1234/gbf-numbers/master/img/copy.jpg)
+![](https://raw.githubusercontent.com/menma1234/gbf-battlecopy/master/img/copy.jpg)
 
 ## Installation
 
