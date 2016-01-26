@@ -1,0 +1,16 @@
+{
+	"name": "GBF Battle ID Copy",
+	"version": "1.0.0",
+	"minimum_chrome_version": "40.0",
+	"manifest_version": 2,
+	"description": "Adds a copy to clipboard button for the multibattle ID in Granblue Fantasy.",
+	"content_scripts": [
+		{
+			"matches": ["http://gbf.game.mbga.jp/*"],
+			"js": ["src/content/copy.js"]
+		}
+	],
+	"permissions": [
+		"http://gbf.game.mbga.jp/*"
+	]
+}
