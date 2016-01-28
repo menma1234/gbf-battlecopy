@@ -39,6 +39,50 @@ function getSpriteUrl() {
 	}
 }
 
+// adds and styles the button
+function style(spriteUrl, node, id, dpi_mode) {
+	var div = document.createElement("div");
+	div.innerHTML = "Copy";
+	
+	if(dpi_mode === 0) {
+		div.style.background = spriteUrl + " no-repeat 0 -1998px";
+		div.style.backgroundSize = "223px 2723px";
+	} else if(dpi_mode === 1) {
+		div.style.background = spriteUrl + " no-repeat 0 -2018px";
+		div.style.backgroundSize = "224px 2602px";
+	} else {
+		div.style.background = spriteUrl + " no-repeat 0 -1815px";
+		div.style.backgroundSize = "223px 2531px";
+	}
+	
+	div.style.width = "105px";
+	div.style.height = "36px";
+	div.style.display = "inline-block";
+	div.style.paddingTop = "10px";
+	
+	div.style.boxSizing = "border-box";
+	div.style.color = "#f2eee2";
+	div.style.textShadow = "0 0 1px #253544,0 0 1px #253544,0 0 1px #253544,0 0 1px #253544,0 0 2px #253544,0 0 2px #253544,0 0 2px #253544,0 0 2px #253544";
+	div.style.fontSize = "12px";
+	div.style.textAlign = "center";
+	div.style.textDecoration = "none";
+	div.style.lineHeight = "1";
+	
+	node.appendChild(div);
+	
+	div.addEventListener("click", function() { 
+		div.innerHTML = copyTextToClipboard(id) ? "Copied" : "Error";
+	});
+	
+	div.addEventListener("touchstart", function() {
+		div.style.transform = "scale(0.95, 0.95) translateY(2px)";
+	});
+	
+	div.addEventListener("touchend", function() {
+		div.style.transform = "";
+	});
+}
+
 function main() {
 	if(window.location.hash.indexOf("raid_multi") >= 0) {
 		var spriteUrl = getSpriteUrl();
@@ -52,39 +96,19 @@ function main() {
 						node = document.evaluate(".//div[@class = 'prt-battle-join']", document.getElementById("pop"), mutation.addedNodes[i], XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 						id = document.evaluate(".//div[@class = 'prt-battle-id']", node, mutation.addedNodes[i], XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.innerHTML;
 						
-						var div = document.createElement("div");
-						div.innerHTML = "Copy";
-						
-						div.style.background = spriteUrl + " no-repeat 0 -1998px";
-						div.style.backgroundSize = "223px 2723px";
-						div.style.width = "105px";
-						div.style.height = "36px";
-						div.style.display = "inline-block";
-						div.style.paddingTop = "10px";
-						
-						div.style.boxSizing = "border-box";
-						div.style.color = "#f2eee2";
-						div.style.textShadow = "0 0 1px #253544,0 0 1px #253544,0 0 1px #253544,0 0 1px #253544,0 0 2px #253544,0 0 2px #253544,0 0 2px #253544,0 0 2px #253544";
-						div.style.fontSize = "12px";
-						div.style.textAlign = "center";
-						div.style.textDecoration = "none";
-						div.style.lineHeight = "1";
-						
-						node.appendChild(div);
-						
-						div.addEventListener("click", function() { 
-							div.innerHTML = copyTextToClipboard(id) ? "Copied" : "Error";
+						// inject a script into the context of the document to get the quality mode in order to determine the css rules to use
+						window.addEventListener("dpi_mode", function(e) {
+							style(spriteUrl, node, id, e.detail);
 						});
+						var script = document.createElement("script");
+						script.textContent = "(" + function() {
+							var event = new CustomEvent("dpi_mode", {detail: Game.setting.dpi_mode});
+							window.dispatchEvent(event);
+						} + ")();";
+						document.head.appendChild(script);
+						document.head.removeChild(script);
 						
-						div.addEventListener("touchstart", function() {
-							div.style.transform = "scale(0.95, 0.95) translateY(2px)";
-						});
-						
-						div.addEventListener("touchend", function() {
-							div.style.transform = "";
-						});
-						
-						// guaranteed that pop div is present, no need to observe on contents anymore since that changs much more frequently
+						// guaranteed that pop div is present, no need to observe on contents anymore since that changes much more frequently
 						observer.disconnect();
 						observer.observe(document.getElementById("pop"), {subtree:true, childList:true});
 						break;
