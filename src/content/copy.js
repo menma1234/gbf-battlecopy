@@ -46,13 +46,13 @@ function style(spriteUrl, node, id, dpi_mode) {
 	
 	if(dpi_mode === 0) {
 		div.style.background = spriteUrl + " no-repeat 0 -1998px";
-		div.style.backgroundSize = "223px 2758px";
+		div.style.backgroundSize = "223px 2789px";
 	} else if(dpi_mode === 1) {
 		div.style.background = spriteUrl + " no-repeat 0 -2018px";
-		div.style.backgroundSize = "224px 2636px";
+		div.style.backgroundSize = "224px 2665px";
 	} else {
 		div.style.background = spriteUrl + " no-repeat 0 -1815px";
-		div.style.backgroundSize = "223px 2563px";
+		div.style.backgroundSize = "223px 2591px";
 	}
 	
 	div.style.width = "105px";
