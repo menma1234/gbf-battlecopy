@@ -28,15 +28,7 @@ function copyTextToClipboard(text) {
 
 // gets the url of the image holding the button sprites
 function getSpriteUrl() {
-	for(var i = 0; i < document.styleSheets.length; i++) {
-		var rules = document.styleSheets[i].cssRules || [];
-		
-		for(var j = 0; j < rules.length; j++) {
-			if((rules[j].selectorText || "").indexOf(".btn-usual-text") >= 0 && rules[j].style.background.length > 0) {
-				return rules[j].style.background.replace(/^.*(url\(.*\)).*$/, "$1");
-			}
-		}
-	}
+	return window.getComputedStyle(document.getElementsByClassName("btn-usual-text")[0]).background.replace(/^.*(url\(.*\)).*$/, "$1");
 }
 
 // adds and styles the button
