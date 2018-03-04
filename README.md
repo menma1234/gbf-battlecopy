@@ -8,7 +8,7 @@ This extension for Chrome provides a button to copy the ID of a multibattle to c
 
 Download a [ZIP of this repo](https://github.com/menma1234/gbf-battlecopy/archive/master.zip), unzip it, hit "Load unpacked extension...", and find the directory you unzipped it to. I'm not providing a packed version of this.
 
-Unlike my other extensions, this does not need developer tools, so you can use this if you're using some user agent switcher.
+Unlike my other extensions, this does not need developer tools.
 
 ## Future
 
