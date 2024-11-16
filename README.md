@@ -1,5 +1,7 @@
 # Granblue Fantasy Battle ID Copy
 
+**As of Nov. 15, 2024, this extension has been rendered obsolete due to a copy button now existing in-game.**
+
 This extension for Chrome provides a button to copy the ID of a multibattle to clipboard. Inspired by the [battle.js script created by ckx000](https://github.com/ckx000/GBF).
 
 ![](https://raw.githubusercontent.com/menma1234/gbf-battlecopy/master/img/copy.jpg)
